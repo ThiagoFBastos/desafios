@@ -20,6 +20,9 @@ export default class ExcluiPacienteView {
                     case Errors.CPF_NOT_FOUND:
                         console.log('\tO paciente não foi encontrado');
                         break;
+                    case Errors.PATIENT_ALREDY_SCHEDULED:
+                        console.log('\tO paciente tem um agendamento marcado');
+                        break;
                     case Errors.INTERNAL_ERROR:
                         console.log('\tAconteceu um erro interno no sistema');
                         break;

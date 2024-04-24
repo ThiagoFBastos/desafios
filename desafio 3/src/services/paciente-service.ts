@@ -53,5 +53,17 @@ export default class PacienteService {
             }]
         });
         return pacientes;
-    }   
+    }
+
+    async checkPacienteAgendado(cpf: string): Promise<boolean> {
+        let paciente: Paciente | null = await this.model.findOne({
+            where: {cpf},
+            include: [{
+                model: Agendamento,
+                where: {dataInicio: {[Op.gte]: DateTime.now().toJSDate()}},
+                required: true
+            }]
+        });
+        return paciente != null;
+    }
 }

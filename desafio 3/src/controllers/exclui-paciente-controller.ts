@@ -22,6 +22,15 @@ export class ExcluiPacienteController {
                 };
             }
 
+            let pacienteJaAgendado: boolean = await this.pacienteService.checkPacienteAgendado(cpf);
+
+            if(pacienteJaAgendado) {
+                return {
+                    status: Status.ERROR,
+                    errors: [Errors.PATIENT_ALREDY_SCHEDULED]
+                };
+            }
+
             await this.pacienteService.removePaciente(cpf);
 
             return {status: Status.SUCCESS};
